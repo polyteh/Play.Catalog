@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using Play.Catalog.Service.Extensions;
 
 namespace Play.Catalog.Service
 {
@@ -31,6 +32,8 @@ namespace Play.Catalog.Service
 
             BsonSerializer.RegisterSerializer(new GuidSerializer(MongoDB.Bson.BsonType.String));
             BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(MongoDB.Bson.BsonType.String));
+
+            services.AddDependencies(Configuration);
 
             services.AddControllers(options=>{
                 options.SuppressAsyncSuffixInActionNames = false;
